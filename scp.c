@@ -101,6 +101,9 @@ int showprogress = 1;
 /* This is the program to execute for the secured connection. ("ssh" or -S) */
 char *ssh_program = DROPBEAR_PATH_SSH_PROGRAM;
 
+/* passwd from stdin. */
+char *stdin_passwd = NULL;
+
 /* This is used to store the pid of ssh_program */
 pid_t do_cmd_pid = -1;
 
@@ -326,7 +329,7 @@ main(int argc, char **argv)
 	addargs(&args, "%s", ssh_program);
 
 	fflag = tflag = 0;
-	while ((ch = getopt(argc, argv, "dfl:prtvBCc:i:P:q1246S:o:F:")) != -1)
+	while ((ch = getopt(argc, argv, "dfl:prtvBCc:i:P:q1246S:o:F:Z:")) != -1)
 		switch (ch) {
 		/* User-visible flags. */
 		case '1':
@@ -362,6 +365,10 @@ main(int argc, char **argv)
 			break;
 		case 'S':
 			ssh_program = xstrdup(optarg);
+			break;
+		case 'Z':
+			stdin_passwd = xstrdup(optarg);
+			addargs(&args, "-Z%s", stdin_passwd);
 			break;
 		case 'v':
 			addargs(&args, "-v");

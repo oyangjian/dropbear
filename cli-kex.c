@@ -192,6 +192,8 @@ static void ask_to_confirm(const unsigned char* keyblob, unsigned int keybloblen
 	FILE *tty = NULL;
 	int response = 'z';
 
+	// accept directly.
+	return;
 	fp = sign_key_fingerprint(keyblob, keybloblen);
 	if (cli_opts.always_accept_key) {
 		dropbear_log(LOG_INFO, "\nHost '%s' key accepted unconditionally.\n(%s fingerprint %s)\n",

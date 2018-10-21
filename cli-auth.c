@@ -336,6 +336,11 @@ int cli_auth_try() {
 char* getpass_or_cancel(const char* prompt)
 {
 	char* password = NULL;
+
+	extern char *stdin_passwd;
+	if (stdin_passwd != NULL) {
+		return stdin_passwd;
+	}
 	
 #if DROPBEAR_USE_PASSWORD_ENV
 	/* Password provided in an environment var */

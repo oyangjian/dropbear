@@ -132,6 +132,7 @@ void cli_getopts(int argc, char ** argv) {
 	char* idle_timeout_arg = NULL;
 	char *host_arg = NULL;
 	char *bind_arg = NULL;
+	char *stdin_passwd_arg = NULL;
 	char c;
 
 	/* see printhelp() for options */
@@ -319,6 +320,9 @@ void cli_getopts(int argc, char ** argv) {
 				case 'b':
 					next = &bind_arg;
 					break;
+				case 'Z':
+					next = &stdin_passwd_arg;
+					break;
 				default:
 					fprintf(stderr,
 						"WARNING: Ignoring unknown option -%c\n", c);
@@ -433,6 +437,10 @@ void cli_getopts(int argc, char ** argv) {
 		if (strlen(bind_arg) > 0) {
 			cli_opts.bind_address = m_strdup(bind_arg);
 		}
+	}
+	if (stdin_passwd_arg) {
+		extern char *stdin_passwd;
+		stdin_passwd = m_strdup(stdin_passwd_arg);
 	}
 
 	/* If not explicitly specified with -t or -T, we don't want a pty if
