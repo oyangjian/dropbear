@@ -1,6 +1,8 @@
 #! /bin/bash
 
 autoconf 
+autoheader
+
 make clean
 if [ "$1" != arm ] ; then
 	echo "build for x86"
