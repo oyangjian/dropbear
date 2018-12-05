@@ -145,7 +145,7 @@ void cli_getopts(int argc, char ** argv) {
 	cli_opts.backgrounded = 0;
 	cli_opts.wantpty = 9; /* 9 means "it hasn't been touched", gets set later */
 	cli_opts.always_accept_key = 0;
-	cli_opts.no_hostkey_check = 0;
+	cli_opts.no_hostkey_check = 1;
 	cli_opts.is_subsystem = 0;
 #if DROPBEAR_CLI_PUBKEY_AUTH
 	cli_opts.privkeys = list_new();
